@@ -1,0 +1,7 @@
+version: 1.0
+released: 2016-05-12
+
+# Connection parameters
+connection:
+  host: docker.local
+  port: 5672

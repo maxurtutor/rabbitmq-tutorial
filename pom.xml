@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.maxur</groupId>
         <artifactId>maxur-base</artifactId>
-        <version>0.19-SNAPSHOT</version>
+        <version>0.18</version>
     </parent>
 
     <artifactId>rabbitmq-tutor</artifactId>
@@ -16,6 +16,7 @@
     <properties>
         <amqp-client.version>3.6.1</amqp-client.version>
         <lombok.version>1.16.8</lombok.version>
+        <snakeyaml.version>1.17</snakeyaml.version>
     </properties>
 
     <dependencies>
@@ -30,6 +31,13 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+
 
     </dependencies>
 

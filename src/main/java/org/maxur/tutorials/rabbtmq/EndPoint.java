@@ -16,19 +16,29 @@ import java.util.concurrent.TimeoutException;
  * @since <pre>12.05.2016</pre>
  */
 @Slf4j
-class RabbitMQChannel implements Closeable {
+public class EndPoint implements Closeable, Channel {
 
     @Delegate(excludes = Closeable.class)
     private Channel channel;
 
     private Connection connection;
 
-    RabbitMQChannel() throws IOException, TimeoutException {
+    private EndPoint(final ConnectionConfig config) throws IOException, TimeoutException {
+
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("docker.local");
-        factory.setPort(32769);
+        factory.setHost(config.getHost());
+        factory.setPort(config.getPort());
         this.connection = factory.newConnection();
         this.channel = connection.createChannel();
+    }
+
+    public static EndPoint channel(
+        final ConnectionConfig config,
+        final String queueName
+    ) throws IOException, TimeoutException {
+        final EndPoint endPoint = new EndPoint(config);
+        endPoint.queueDeclare(queueName, false, false, false, null);
+        return endPoint;
     }
 
     @Override
@@ -45,7 +55,4 @@ class RabbitMQChannel implements Closeable {
         }
     }
 
-    Channel get() {
-        return channel;
-    }
 }
