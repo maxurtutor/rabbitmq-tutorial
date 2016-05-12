@@ -20,8 +20,9 @@ public final class Sender {
     private Sender() {
     }
 
-    public static void main(String[] argv) {
-        try (EndPoint channel = EndPoint.channel(Config.fromResource("/config.yaml").getConnection(), QUEUE_NAME)) {
+    public static void main(String[] argv) throws IOException {
+        final Config config = Config.fromResource("/config.yaml");
+        try (EndPoint channel = EndPoint.channel(config.getConnection(), config.getQueue())) {
             String message = "Hello World!";
             for (int i = 0; i < 10000; i++) {
                 channel.basicPublish("", QUEUE_NAME, null, message.getBytes());

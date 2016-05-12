@@ -21,6 +21,8 @@ public class Config {
 
     private ConnectionConfig connection;
 
+    private QueueConfig queue;
+
     public static Config fromResource(final String name) throws IOException {
         try(InputStream in = ClassLoader.class.getResourceAsStream(name) ) {
             return new Yaml().loadAs(in, Config.class);

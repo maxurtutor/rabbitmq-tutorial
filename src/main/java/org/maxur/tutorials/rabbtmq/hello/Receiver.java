@@ -24,8 +24,9 @@ public final class Receiver {
     private Receiver() {
     }
 
-    public static void main(String[] argv) {
-        try (EndPoint channel = EndPoint.channel(Config.fromResource("/config.yaml").getConnection(), QUEUE_NAME)) {
+    public static void main(String[] argv) throws IOException {
+        final Config config = Config.fromResource("/config.yaml");
+        try (EndPoint channel = EndPoint.channel(config.getConnection(), config.getQueue())) {
             channel.basicConsume(QUEUE_NAME, true, new Consumer(channel));
             pressAnyKeyToContinue();
         }  catch (RuntimeException | IOException | TimeoutException e) {

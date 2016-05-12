@@ -5,3 +5,7 @@ released: 2016-05-12
 connection:
   host: docker.local
   port: 5672
+
+# Queue parameters
+queue:
+  name: hello

@@ -33,11 +33,11 @@ public class EndPoint implements Closeable, Channel {
     }
 
     public static EndPoint channel(
-        final ConnectionConfig config,
-        final String queueName
+        final ConnectionConfig connection,
+        final QueueConfig queue
     ) throws IOException, TimeoutException {
-        final EndPoint endPoint = new EndPoint(config);
-        endPoint.queueDeclare(queueName, false, false, false, null);
+        final EndPoint endPoint = new EndPoint(connection);
+        endPoint.queueDeclare(queue.getName(), false, false, false, null);
         return endPoint;
     }
 
